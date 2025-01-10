@@ -16,7 +16,7 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git@github.com:gautric/node-red-ipinfo.git"
+    "url": "git+ssh://git@github.com/gautric/node-red-ipinfo.git"
   },
   "type": "commonjs",
   "main": "ipinfo.js",
