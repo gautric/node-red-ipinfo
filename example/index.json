@@ -1,0 +1,74 @@
+[
+    {
+        "id": "57f1942a3d93fd81",
+        "type": "tab",
+        "label": "IPInfo",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "273577b3975a77c8",
+        "type": "ipinfo",
+        "z": "57f1942a3d93fd81",
+        "name": "IP Info node",
+        "property": "payload",
+        "propertyout": "payload",
+        "config": "1bc1148c7ba894cd",
+        "x": 290,
+        "y": 200,
+        "wires": [
+            [
+                "dfbe447e9995ad73"
+            ]
+        ]
+    },
+    {
+        "id": "27960e1de9cf4ee9",
+        "type": "inject",
+        "z": "57f1942a3d93fd81",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "8.8.8.8",
+        "payloadType": "str",
+        "x": 110,
+        "y": 200,
+        "wires": [
+            [
+                "273577b3975a77c8"
+            ]
+        ]
+    },
+    {
+        "id": "dfbe447e9995ad73",
+        "type": "debug",
+        "z": "57f1942a3d93fd81",
+        "name": "Info",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 470,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "1bc1148c7ba894cd",
+        "type": "ipinfo-config",
+        "name": "IPInfo Config",
+        "timeout": 1000
+    }
+]
