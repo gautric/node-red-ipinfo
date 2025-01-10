@@ -1,0 +1,73 @@
+<script type="text/javascript">
+    RED.nodes.registerType('ipinfo', {
+        category: 'function',
+        color: '#ffffff',
+        defaults: {
+            name: { value: "" },
+            property: {
+                value: "payload", required: true,
+                label: RED._("node-red:common.label.property"),
+                validate: RED.validators.typedInput({ type: 'msg', allowBlank: true })
+            },
+            propertyout: {
+                value: "payload", required: true,
+                label: RED._("node-red:common.label.property"),
+                validate: RED.validators.typedInput({ type: 'msg', allowBlank: true })
+            },
+            config: {value:"", type:"ipinfo-config", required:true},
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "ipinfo.svg",
+        label: function () {
+            return this.name || "ipinfo";
+        },
+        inputLabels: "ip",
+        outputLabels: ["ipinfo"],
+        oneditprepare: function () {
+            if (this.property === undefined) {
+                $("#node-input-property").val("payload");
+            }
+            $("#node-input-property").typedInput({ default: 'msg', types: ['msg'] });
+
+            if (this.property === undefined) {
+                $("#node-input-propertyout").val("payload");
+            }
+            $("#node-input-propertyout").typedInput({ default: 'msg', types: ['msg'] });
+
+            // $("#node-input-timeout").typedInput({
+            //     type: "num",
+            //     types: ["num"],
+            //     typeField: "#node-input-timeout-type"
+            // });
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="ipinfo">
+    <div class="form-row">
+        <label for="node-input-property"><i class="fa fa-sign-in"></i> <span data-i18n="ipinfo.label.property"></span></label>
+        <input type="text" id="node-input-property" style="width:calc(70% - 1px)"/>
+    </div>
+    <!-- <div class="form-row">
+        <label for="node-input-property"><i class="fa fa-clock-o"></i> <span data-i18n="ipinfo.label.timeout"></span></label>
+        <input type="text" id="node-input-timeout">
+        <input type="hidden" id="node-input-timeout-type">
+    </div> -->
+    <div class="form-row">
+        <label for="node-input-property"><i class="fa fa-sign-out"></i> <span data-i18n="ipinfo.label.propertyout"></span></label>
+        <input type="text" id="node-input-propertyout" style="width:calc(70% - 1px)"/>
+    </div>
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="ipinfo.label.name"></span></label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+    <div class="form-row">
+        <label for="node-input-config"><i class="fa fa-tag"></i> <span data-i18n="ipinfo.label.config"></span></label>
+        <input type="text" id="node-input-config" placeholder="Token">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="ipinfo">
+    <p>IPinfo NodeJS Client Library for Node Red</p>
+</script>

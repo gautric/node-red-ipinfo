@@ -1,0 +1,43 @@
+<script type="text/javascript">
+    RED.nodes.registerType('ipinfo-config', {
+        category: 'config',
+        defaults: {
+            name: { value: "IPInfo Config", required: true },
+            timeout: {
+                value: "1000", required: true,
+                label: RED._("node-red:common.label.timeout"),
+                validate: RED.validators.typedInput({ type: 'num' })
+            },
+        },
+        credentials: {
+            token: { type: "password" }
+        },
+        label: function () {
+            return this.name;
+        },
+        oneditprepare: function () {
+           
+            $("#node-config-input-timeout").typedInput({
+                type: "num",
+                types: ["num"],
+                typeField: "#node-config-input-timeout-type"
+            });
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="ipinfo-config">
+    <div class="form-row">
+        <label for="node-config-input-name"><i class="fa fa-bookmark"></i> Name</label>
+        <input type="text" id="node-config-input-name">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-name"><i class="fa fa-clock-o"></i> Timeout</label>
+        <input type="text" id="node-config-input-timeout">
+        <input type="hidden" id="node-config-input-timeout-type">
+    </div>
+    <div class="form-row">
+        <label for="node-config-input-token"><i class="fa fa-tag"></i> Token</label>
+        <input type="password" id="node-config-input-token">
+    </div>
+</script>

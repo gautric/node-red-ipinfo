@@ -1,0 +1,11 @@
+{
+    "ipinfo" : {
+        "label.property": " Input",
+        "label.propertyout": " Output",
+        "label.timeout": " Timeout",
+        "label.token": " Token",
+        "label.name": " Name",
+        "status.lookupip": "Looking up IP address",
+        "status.error": "Error"
+    }
+}
