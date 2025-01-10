@@ -1,6 +1,6 @@
 {
   "name": "node-red-ipinfo",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "The Trusted Source For IP Address Data Node-Red Implementation",
   "keywords": [
     "node-red",
