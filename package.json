@@ -5,7 +5,9 @@
   "keywords": [
     "node-red",
     "IPinfo",
-    "node-ipinfo"
+    "node-ipinfo",
+    "ip",
+    "geolocation"
   ],
   "node-red": {
     "nodes": {
