@@ -1,0 +1,26 @@
+{
+  "name": "node-red-ipinfo",
+  "version": "0.0.2",
+  "description": "The Trusted Source For IP Address Data Node-Red Implementation",
+  "keywords": [
+    "node-red",
+    "IPinfo",
+    "node-ipinfo"
+  ],
+  "node-red": {
+    "nodes": {
+      "ipinfo": "ipinfo.js",
+      "ipinfo-config": "ipinfo-config.js"
+    }
+  },
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:gautric/node-red-ipinfo.git"
+  },
+  "type": "commonjs",
+  "main": "ipinfo.js",
+  "dependencies": {
+    "node-ipinfo": "^4.0.1"
+  }
+}
