@@ -8,6 +8,20 @@
                 label: RED._("node-red:common.label.timeout"),
                 validate: RED.validators.typedInput({ type: 'num' })
             },
+            cacheEnabled: { value: false,
+                label: RED._("node-red:common.label.cacheEnabled"),
+                validate: RED.validators.typedInput({ type: 'bool' })
+            },
+            maxitem: {
+                value: "5000", required: false,
+                label: RED._("node-red:common.label.timeout"),
+                validate: RED.validators.typedInput({ type: 'num' })
+            },
+            ttl: {
+                value: ""+ (24 * 1000 * 60 * 60), required: false,
+                label: RED._("node-red:common.label.timeout"),
+                validate: RED.validators.typedInput({ type: 'num' })
+            },
         },
         credentials: {
             token: { type: "password" }
@@ -22,6 +36,28 @@
                 types: ["num"],
                 typeField: "#node-config-input-timeout-type"
             });
+            $("#node-config-input-maxitem").typedInput({
+                type: "num",
+                types: ["num"],
+                typeField: "#node-config-input-maxitem-type"
+            });
+            $("#node-config-input-ttl").typedInput({
+                type: "num",
+                types: ["num"],
+                typeField: "#node-config-input-ttl-type"
+            });
+
+            $("#node-config-input-cacheEnabled").on("change", function() {
+
+                if ($(this).is(":checked")) {
+                    $(".node-config-input-cacheEnabled-row").show();
+                } else {
+                    $(".node-config-input-cacheEnabled-row").hide();
+                    $('#node-config-input-maxitem').val('');
+                    $('#node-config-input-ttl').val('');
+                }
+                RED.tray.resize();
+            });
         }
     });
 </script>
@@ -32,12 +68,32 @@
         <input type="text" id="node-config-input-name">
     </div>
     <div class="form-row">
+        <label for="node-config-input-token"><i class="fa fa-tag"></i> Token</label>
+        <input type="password" id="node-config-input-token">
+    </div>
+    <div class="form-row">
         <label for="node-config-input-name"><i class="fa fa-clock-o"></i> Timeout</label>
         <input type="text" id="node-config-input-timeout">
         <input type="hidden" id="node-config-input-timeout-type">
     </div>
+
+
     <div class="form-row">
-        <label for="node-config-input-token"><i class="fa fa-tag"></i> Token</label>
-        <input type="password" id="node-config-input-token">
+        <input type="checkbox" id="node-config-input-cacheEnabled" style="display: inline-block; width: auto; vertical-align: top;">
+        <label for="node-config-input-cacheEnabled" style="width: 70%;"><i class="fa fa-database"></i> Cache</label>
+        <div style="margin-left: 20px" class="node-config-input-cacheEnabled-row hide">
+            <div class="form-row">
+                <label for="node-config-input-maxitem"><i class="fa fa-ellipsis-h"></i> MaxItem</label>
+                <input type="text" id="node-config-input-maxitem">
+                <input type="hidden" id="node-config-input-maxitem-type">
+
+            </div>
+            <div class="form-row">
+                <label for="node-config-input-ttl"><i class="fa fa-spinner fa-spin fa-fw"></i> TTL</label>
+                <input type="text" id="node-config-input-ttl">
+                <input type="hidden" id="node-config-input-ttl-type">
+            </div>
+        </div>
     </div>
+
 </script>
