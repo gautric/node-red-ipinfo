@@ -25,6 +25,10 @@
     "type": "git",
     "url": "git+ssh://git@github.com/gautric/node-red-ipinfo.git"
   },
+  "bugs" : {
+    "url": "https://github.com/gautric/node-red-ipinfo/issues",
+    "email": "gautric4code@gmail.com"
+  },
   "engines": {
     "node": ">=20"
   },
