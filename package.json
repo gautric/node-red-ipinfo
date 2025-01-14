@@ -7,6 +7,7 @@
     "IPinfo",
     "node-ipinfo",
     "ip",
+    "network",
     "geolocation"
   ],
   "node-red": {
@@ -30,7 +31,7 @@
     "email": "gautric4code@gmail.com"
   },
   "engines": {
-    "node": ">=20"
+    "node": ">=12.0.0"
   },
   "type": "commonjs",
   "main": "ipinfo.js",
