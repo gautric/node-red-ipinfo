@@ -10,6 +10,7 @@
     "geolocation"
   ],
   "node-red": {
+    "version": ">=4.0.8",
     "nodes": {
       "ipinfo": "ipinfo.js",
       "ipinfo-config": "ipinfo-config.js"
