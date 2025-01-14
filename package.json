@@ -16,6 +16,10 @@
       "ipinfo-config": "ipinfo-config.js"
     }
   },
+  "funding": {
+    "type": "individual",
+    "url": "https://www.buymeacoffee.com/gautric"
+  },
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
