@@ -8,6 +8,8 @@
 
 ## Installation
 
+Either use the Menu - Manage palette option, or run the following command in your Node-RED user directory - typically ~/.node-red
+
 ```sh
 # Using npm
 npm install --save @gautric/node-red-ipinfo
