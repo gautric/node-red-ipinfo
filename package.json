@@ -1,6 +1,6 @@
 {
   "name": "@gautric/node-red-ipinfo",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "description": "The Trusted Source For IP Address Data Node-Red Implementation",
   "keywords": [
     "node-red",
@@ -25,7 +25,7 @@
     "type": "git",
     "url": "git+ssh://git@github.com/gautric/node-red-ipinfo.git"
   },
-  "bugs" : {
+  "bugs": {
     "url": "https://github.com/gautric/node-red-ipinfo/issues",
     "email": "gautric4code@gmail.com"
   },
