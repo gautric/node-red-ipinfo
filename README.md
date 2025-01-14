@@ -6,7 +6,7 @@
 
 <a href="https://www.buymeacoffee.com/gautric" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/yellow_img.png" alt="Buy Me A Coffee"></a>
 
-## :cloud: Installation
+## Installation
 
 ```sh
 # Using npm
@@ -16,9 +16,9 @@ npm install --save @gautric/node-red-ipinfo
 yarn add @gautric/node-red-ipinfo
 ```
 
-## :clipboard: Example
+## Example
 
 ![Screenshot](images/Screenshoot.png)
 
-## :yum: How to contribute
+## How to contribute
 Have an idea? Found a bug? See [how to contribute][contributing].
