@@ -21,6 +21,9 @@
     "type": "git",
     "url": "git+ssh://git@github.com/gautric/node-red-ipinfo.git"
   },
+  "engines": {
+    "node": ">=20"
+  },
   "type": "commonjs",
   "main": "ipinfo.js",
   "dependencies": {
