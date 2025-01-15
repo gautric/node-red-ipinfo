@@ -79,7 +79,11 @@
 
 
     <div class="form-row">
-        <label for="node-config-input-cacheEnabled" style="width: 70%;"><i class="fa fa-database"></i> Cache</label><input type="checkbox" id="node-config-input-cacheEnabled" style="display: inline-block; width: auto; vertical-align: top;">
+        <label for="node-config-input-cacheEnabled"><i class="fa fa-database"></i> Cache</label><input type="checkbox" id="node-config-input-cacheEnabled" style="display: inline-block; width: auto; vertical-align: top;">
+    </div>
+
+    <div class="form-row">
+
         <div style="margin-left: 20px" class="node-config-input-cacheEnabled-row hide">
             <div class="form-row">
                 <label for="node-config-input-maxitem"><i class="fa fa-ellipsis-h"></i> MaxItem</label>
@@ -106,7 +110,7 @@
     <ul dir="auto">
         <li><code>name</code>: Name of the instance node configuration</li>
         <li><code>token</code>: <a href="https://ipinfo.io/account/token" rel="nofollow">Your Token</a> for calling <a href="https://ipinfo.io" rel="nofollow">IPInfo</a>  service</li>
-        <li><code>timeout</code>: <code>1000</code> ms Timeout of the request</li>
+        <li><code>timeout</code>: <code>1000</code> ms, Timeout of the request</li>
         <li><code>cacheEnabled</code>: <code>true</code>/<code>false</code>, Enable or disable cache to improve perf and reduce cost</li>
         <li><code>maxitem</code>: <code>5000</code>, number max of item into the cache</li>
         <li><code>ttl</code>: <code>24 * 1000 * 60 * 60</code> ms, Time To Leave of the item inside the cache</li>
