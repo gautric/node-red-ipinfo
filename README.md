@@ -1,8 +1,9 @@
 # IP Info - Node Red 
 
- [![Version](https://img.shields.io/npm/v/@gautric/node-red-ipinfo.svg)](https://www.npmjs.com/package/@gautric/node-red-ipinfo) 
- 
- [![Downloads](https://img.shields.io/npm/dt/@gautric/node-red-ipinfo.svg)](https://www.npmjs.com/package/@gautric/node-red-ipinfo) 
+[![platform](https://img.shields.io/badge/platform-Node--RED-red?logo=nodered)](https://nodered.org)
+![GitHub last commit](https://img.shields.io/github/last-commit/gautric/node-red-ipinfo/main)
+[![Version](https://img.shields.io/npm/v/@gautric/node-red-ipinfo.svg)](https://www.npmjs.com/package/@gautric/node-red-ipinfo) 
+[![Downloads](https://img.shields.io/npm/dt/@gautric/node-red-ipinfo.svg)](https://www.npmjs.com/package/@gautric/node-red-ipinfo) 
 
 <a href="https://www.buymeacoffee.com/gautric" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/yellow_img.png" alt="Buy Me A Coffee"></a>
 
