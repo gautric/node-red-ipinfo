@@ -22,5 +22,4 @@ yarn add @gautric/node-red-ipinfo
 
 ![Screenshot](images/Screenshoot.png)
 
-## How to contribute
-Have an idea? Found a bug? See [how to contribute][contributing].
+
