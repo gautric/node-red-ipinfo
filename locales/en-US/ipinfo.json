@@ -6,6 +6,7 @@
         "label.token": " Token",
         "label.name": " Name",
         "status.lookupip": "Looking up IP address",
-        "status.error": "Error"
+        "status.error": "Error",
+        "label.config" : "Config."
     }
 }
