@@ -37,7 +37,7 @@ yarn add @gautric/node-red-ipinfo
 
 ## Example
 
-![Screenshot](images/Screenshoot.png)
+![Screenshot](https://raw.githubusercontent.com/gautric/node-red-ipinfo/refs/heads/main/images/Screenshoot.png)
 
 ## Get Help
 
