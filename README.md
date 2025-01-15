@@ -21,19 +21,19 @@ yarn add @gautric/node-red-ipinfo
 ## Configuration 
 
 * Node 
-    * `input` : `msg.payload` Where retrieve the IP adress from the message
-    * `output` : `msg.payload` Where put the result into the node-red image
+    * `input` : `msg.payload`, Where retrieve the IP adress from the message
+    * `output` : `msg.payload`, Where put the result into the node-red image
     * `name` : Name of the instance node 
     * `config` : `IPInfo Config` 
 
 
 * IPInfo Config
-    * `name`: `"IPInfo Config"`
-    * `token`: [Your Token](https://ipinfo.io/account/token) 
-    * `timeout`: `1000` ms
-    * `cacheEnabled`: `true`/`false`,
-    * `maxitem`: `5000`
-    * `ttl`: `24 * 1000 * 60 * 60` ms
+    * `name`: Name of the instance node configuration
+    * `token`: [Your Token](https://ipinfo.io/account/token) for calling [IPInfo](https://ipinfo.io) service
+    * `timeout`: `1000` ms, Timeout of the request 
+    * `cacheEnabled`: `true`/`false`, Enable or disable cache to improve perf and reduce cost
+    * `maxitem`: `5000`, number max of item into the cache
+    * `ttl`: `24 * 1000 * 60 * 60` ms, Time To Leave of the item inside the cache
 
 ## Example
 
