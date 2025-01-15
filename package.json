@@ -1,6 +1,6 @@
 {
   "name": "@gautric/node-red-ipinfo",
-  "version": "0.9.10",
+  "version": "0.10.11",
   "description": "The Trusted Source For IP Address Data Node-Red Implementation",
   "keywords": [
     "node-red",
