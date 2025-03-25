@@ -1,4 +1,4 @@
-# IP Info - Node Red 
+# IP Info - Node-RED 
 
 [![platform](https://img.shields.io/badge/platform-Node--RED-red?logo=nodered)](https://nodered.org)
 ![GitHub last commit](https://img.shields.io/github/last-commit/gautric/node-red-ipinfo/main)
@@ -22,19 +22,19 @@ yarn add @gautric/node-red-ipinfo
 ## Configuration 
 
 * Node 
-    * `input` : `msg.payload`, Where retrieve the IP adress from the message
-    * `output` : `msg.payload`, Where put the result into the node-red image
-    * `name` : Name of the instance node 
-    * `config` : `IPInfo Config` 
+    * `input`: `msg.payload`, Where to retrieve the IP address from the message
+    * `output`: `msg.payload`, Where to put the result into the Node-RED flow
+    * `name`: Name of the node instance
+    * `config`: `IPInfo Config` 
 
 
 * IPInfo Config
-    * `name`: Name of the instance node configuration
-    * `token`: [Your Token](https://ipinfo.io/account/token) for calling [IPInfo](https://ipinfo.io) service
-    * `timeout`: `1000` ms, Timeout of the request 
-    * `cacheEnabled`: `true`/`false`, Enable or disable cache to improve perf and reduce cost
-    * `maxitem`: `5000`, number max of item into the cache
-    * `ttl`: `24 * 1000 * 60 * 60` ms, Time To Leave of the item inside the cache
+    * `name`: Name of the node configuration instance
+    * `token`: [Your Token](https://ipinfo.io/account/token) for calling the [IPInfo](https://ipinfo.io) service
+    * `timeout`: `1000` ms, Timeout for the request 
+    * `cacheEnabled`: `true`/`false`, Enable or disable cache to improve performance and reduce cost
+    * `maxitem`: `5000`, maximum number of items in the cache
+    * `ttl`: `24 * 1000 * 60 * 60` ms, Time To Live (TTL) of items in the cache
 
 ## Example
 
