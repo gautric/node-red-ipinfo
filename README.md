@@ -67,7 +67,7 @@ yarn add @gautric/node-red-ipinfo
 
 ## Usage Example
 
-![Node-RED IP Info Node Screenshot](https://raw.githubusercontent.com/gautric/node-red-ipinfo/refs/heads/main/images/Screenshot.png)
+![Node-RED IP Info Node Screenshot](https://raw.githubusercontent.com/gautric/node-red-ipinfo/refs/heads/main/images/screenshot.png)
 
 ### Basic Flow Example
 
