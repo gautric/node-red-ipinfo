@@ -1,7 +1,5 @@
 const { IPinfoWrapper } = require("node-ipinfo");
 
-console.log("IPInfo Node-RED module loaded");
-
 /**
  * Node-RED module for retrieving IP geolocation information using IPInfo service
  * 
@@ -31,6 +29,31 @@ module.exports = function(RED) {
         // Get the IPInfo configuration node
         var ipinfoconfig = RED.nodes.getNode(config.config);
 
+        // Validate configuration node exists
+        if (!ipinfoconfig) {
+            node.error(RED._("ipinfo.errors.missing-config"));
+            node.status({fill:"red", shape:"ring", text:"ipinfo.status.missing-config"});
+            return;
+        }
+
+        /**
+         * Validates if a string is a valid IP address (IPv4 or IPv6)
+         * @param {string} ip - The IP address to validate
+         * @returns {boolean} - True if valid IP address
+         */
+        function isValidIP(ip) {
+            if (!ip || typeof ip !== 'string') {
+                return false;
+            }
+            
+            // IPv4 pattern
+            const ipv4Pattern = /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+            // IPv6 pattern (simplified)
+            const ipv6Pattern = /^(?:[A-F0-9]{1,4}:){7}[A-F0-9]{1,4}$/i;
+            
+            return ipv4Pattern.test(ip) || ipv6Pattern.test(ip) || ip === 'me';
+        }
+
         /**
          * Handles incoming messages and performs IP lookup
          * 
@@ -38,41 +61,69 @@ module.exports = function(RED) {
          * @param {Function} nodeSend - Function to send the modified message
          * @param {Function} nodeDone - Function to signal message processing completion
          */
-        node.on('input', function(msg,nodeSend,nodeDone) {
+        node.on('input', function(msg, nodeSend, nodeDone) {
             
             // Extract IP address from the specified input property
-            var value = RED.util.getMessageProperty(msg,node.property);
+            var value = RED.util.getMessageProperty(msg, node.property);
+
+            // Validate input
+            if (value === undefined || value === null) {
+                node.error(RED._("ipinfo.errors.no-ip"), msg);
+                node.status({fill:"red", shape:"ring", text:"ipinfo.status.no-ip"});
+                nodeDone();
+                return;
+            }
+
+            // Convert to string if needed
+            value = String(value).trim();
+
+            // Validate IP address format
+            if (!isValidIP(value)) {
+                node.warn(RED._("ipinfo.errors.invalid-ip", {ip: value}));
+                node.status({fill:"yellow", shape:"ring", text:"ipinfo.status.invalid-ip"});
+                nodeDone();
+                return;
+            }
 
             // Set node status to indicate IP lookup in progress
-            node.status({fill:"blue",shape:"dot",text:"ipinfo.status.lookupip"});
+            node.status({fill:"blue", shape:"dot", text:"ipinfo.status.lookupip"});
+            node.debug(RED._("ipinfo.debug.lookup-start", {ip: value}));
 
             // Perform IP geolocation lookup
             ipinfoconfig.client.lookupIp(value).then((result) => {
-                console.log("IPInfo: " + JSON.stringify(result));
+                node.debug(RED._("ipinfo.debug.lookup-success", {ip: value}));
                 
-                // Clear status after a short delay
-                setTimeout(() => node.status({}), 250);
+                // Clear status on successful lookup
+                node.status({});
                 
                 // Set the result in the specified output property
-                RED.util.setMessageProperty(msg,node.propertyout,result);
-                
-                // Send the modified message
-                nodeSend(msg);
-                nodeDone();      
+                try {
+                    RED.util.setMessageProperty(msg, node.propertyout, result);
+                    nodeSend(msg);
+                    nodeDone();
+                } catch(err) {
+                    node.error(RED._("ipinfo.errors.property-error", {error: err.message}), msg);
+                    node.status({fill:"red", shape:"ring", text:"ipinfo.status.error"});
+                    nodeDone(err);
+                }
             }).catch((err) => {
                 // Handle any errors during IP lookup
-                console.log("Error: " + JSON.stringify(err));
+                node.error(RED._("ipinfo.errors.lookup-failed", {error: err.message}), msg);
+                node.status({fill:"red", shape:"dot", text:"ipinfo.status.error"});
                 
-                // Set error status
-                node.status({fill:"red",shape:"dot",text:"ipinfo.status.error"});
-                
-                // Report the error
-                node.error(err);
-                nodeDone();
+                // Pass error to nodeDone for proper error propagation
+                nodeDone(err);
             });
+        });
+
+        /**
+         * Cleanup on node close
+         */
+        node.on('close', function() {
+            node.status({});
         });
     }
 
     // Register the IPInfo node type with Node-RED
-    RED.nodes.registerType("ipinfo",IPInfoNode);
+    RED.nodes.registerType("ipinfo", IPInfoNode);
 }

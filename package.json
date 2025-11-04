@@ -1,6 +1,6 @@
 {
   "name": "@gautric/node-red-ipinfo",
-  "version": "0.30.30",
+  "version": "0.31",
   "description": "The Trusted Source For IP Address Data Node-Red Implementation",
   "keywords": [
     "node-red",
@@ -10,6 +10,11 @@
     "network",
     "geolocation"
   ],
+  "author": {
+    "name": "Greg I/O",
+    "email": "gautric4code@gmail.com"
+  },
+  "homepage": "https://github.com/gautric/node-red-ipinfo#readme",
   "node-red": {
     "version": ">=4.0.8",
     "nodes": {
@@ -35,7 +40,18 @@
   },
   "type": "commonjs",
   "main": "ipinfo.js",
+  "scripts": {
+    "test": "mocha \"test/**/*_spec.js\"",
+    "test:watch": "mocha \"test/**/*_spec.js\" --watch",
+    "test:coverage": "nyc mocha \"test/**/*_spec.js\""
+  },
   "dependencies": {
     "node-ipinfo": "^4.0.1"
+  },
+  "devDependencies": {
+    "mocha": "^10.0.0",
+    "should": "^13.2.3",
+    "node-red-node-test-helper": "^0.3.0",
+    "nyc": "^15.1.0"
   }
 }

@@ -1,12 +1,30 @@
 {
-    "ipinfo" : {
-        "label.property": " Input",
-        "label.propertyout": " Output",
-        "label.timeout": " Timeout",
-        "label.token": " Token",
-        "label.name": " Name",
-        "status.lookupip": "Looking up IP address",
-        "status.error": "Error",
-        "label.config" : "Config."
+    "ipinfo": {
+        "label": {
+            "property": "Input",
+            "propertyout": "Output",
+            "timeout": "Timeout",
+            "token": "Token",
+            "name": "Name",
+            "config": "Config."
+        },
+        "status": {
+            "lookupip": "Looking up IP address",
+            "error": "Error",
+            "missing-config": "Missing configuration",
+            "no-ip": "No IP address",
+            "invalid-ip": "Invalid IP address"
+        },
+        "errors": {
+            "missing-config": "IPInfo configuration node not found",
+            "no-ip": "No IP address provided in message property",
+            "invalid-ip": "Invalid IP address format: __ip__",
+            "lookup-failed": "IP lookup failed: __error__",
+            "property-error": "Error setting output property: __error__"
+        },
+        "debug": {
+            "lookup-start": "Starting IP lookup for: __ip__",
+            "lookup-success": "Successfully looked up IP: __ip__"
+        }
     }
 }

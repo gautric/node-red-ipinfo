@@ -33,7 +33,7 @@
             }
             $("#node-input-property").typedInput({ default: 'msg', types: ['msg'] });
 
-            if (this.property === undefined) {
+            if (this.propertyout === undefined) {
                 $("#node-input-propertyout").val("payload");
             }
             $("#node-input-propertyout").typedInput({ default: 'msg', types: ['msg'] });
@@ -44,11 +44,11 @@
 <script type="text/html" data-template-name="ipinfo">
     <div class="form-row">
         <label for="node-input-property"><i class="fa fa-sign-in"></i> <span data-i18n="ipinfo.label.property"></span></label>
-        <input type="text" id="node-input-property" style="width:calc(70% - 1px)"/>
+        <input type="text" id="node-input-property" style="width:calc(70% - 1px)" placeholder="payload"/>
     </div>
     <div class="form-row">
-        <label for="node-input-property"><i class="fa fa-sign-out"></i> <span data-i18n="ipinfo.label.propertyout"></span></label>
-        <input type="text" id="node-input-propertyout" style="width:calc(70% - 1px)"/>
+        <label for="node-input-propertyout"><i class="fa fa-sign-out"></i> <span data-i18n="ipinfo.label.propertyout"></span></label>
+        <input type="text" id="node-input-propertyout" style="width:calc(70% - 1px)" placeholder="payload"/>
     </div>
     <div class="form-row">
         <label for="node-input-name"><i class="fa fa-tag"></i> <span data-i18n="ipinfo.label.name"></span></label>
@@ -56,24 +56,123 @@
     </div>
     <div class="form-row">
         <label for="node-input-config"><i class="fa fa-cogs"></i> <span data-i18n="ipinfo.label.config"></span></label>
-        <input type="text" id="node-input-config" placeholder="Token">
+        <input type="text" id="node-input-config">
     </div>
 </script>
 
 <script type="text/html" data-help-name="ipinfo">
-    <p>IPinfo NodeJS Client Library for Node Red</p>
-    <p dir="auto">This node retrieves information about an IP address.</p>
+    <p>Retrieves geolocation and network information for IP addresses using the IPInfo.io API.</p>
 
-    <h3>Node</h3>
-    <ul dir="auto">
-        <li><code>input</code> : <code>msg.payload</code> Where retrieve the IP adress from the message</li>
-        <li><code>output</code> : <code>msg.payload</code> Where put the result into the node-red image</li>
-        <li><code>name</code> : Name of the instance node</li>
-        <li><code>config</code> : <code>IPInfo Config</code></li>
+    <h3>Inputs</h3>
+    <dl class="message-properties">
+        <dt class="optional">payload <span class="property-type">string</span></dt>
+        <dd>The IP address to lookup (IPv4, IPv6)</dd>
+        <dt class="optional">property <span class="property-type">string</span></dt>
+        <dd>Alternative message property containing the IP address (configurable)</dd>
+    </dl>
+
+    <h3>Outputs</h3>
+    <dl class="message-properties">
+        <dt>payload <span class="property-type">object</span></dt>
+        <dd>IPInfo data including location, network, and other details</dd>
+    </dl>
+
+    <h3>Details</h3>
+    <p>This node queries the IPInfo.io API to retrieve detailed information about an IP address including:</p>
+    <ul>
+        <li><b>ip</b> - The IP address</li>
+        <li><b>city</b> - City name</li>
+        <li><b>region</b> - Region/State</li>
+        <li><b>country</b> - Country code (e.g., "US")</li>
+        <li><b>loc</b> - Latitude and longitude (e.g., "37.7749,-122.4194")</li>
+        <li><b>org</b> - Organization/ISP</li>
+        <li><b>postal</b> - Postal/ZIP code</li>
+        <li><b>timezone</b> - Timezone (e.g., "America/Los_Angeles")</li>
+        <li>Plus additional fields depending on your IPInfo.io plan</li>
     </ul>
-    
-    <h3>Other info</h3>
-    <a href="https://flows.nodered.org/node/@gautric/node-red-ipinfo" target="_blank">More info at Node-Red</a>
-    <img alt="Version" src="https://img.shields.io/npm/v/@gautric/node-red-ipinfo.svg">
 
+    <h3>Configuration</h3>
+    <dl class="message-properties">
+        <dt>Input Property</dt>
+        <dd>Message property containing the IP address (default: <code>payload</code>)</dd>
+        <dt>Output Property</dt>
+        <dd>Message property to store the result (default: <code>payload</code>)</dd>
+        <dt>Config</dt>
+        <dd>IPInfo configuration node containing your API token and cache settings</dd>
+    </dl>
+
+    <h3>Input Validation</h3>
+    <p>The node validates IP addresses before making API calls:</p>
+    <ul>
+        <li><b>Valid IPv4</b>: e.g., "8.8.8.8", "192.168.1.1"</li>
+        <li><b>Valid IPv6</b>: e.g., "2001:4860:4860::8888"</li>
+        <li><b>Invalid inputs</b>: Show warning status and skip API call</li>
+    </ul>
+
+    <h3>Error Handling</h3>
+    <p>Errors are handled gracefully and can be caught using a <code>catch</code> node:</p>
+    <ul>
+        <li>API errors (invalid token, rate limits, network issues)</li>
+        <li>Invalid IP address format (shows yellow warning status)</li>
+        <li>Missing input (shows red error status)</li>
+        <li>Configuration errors (missing config node)</li>
+    </ul>
+
+    <h3>Status Indicators</h3>
+    <dl class="message-properties">
+        <dt class="optional">Blue dot</dt>
+        <dd>Looking up IP address</dd>
+        <dt class="optional">Yellow ring</dt>
+        <dd>Invalid IP address format</dd>
+        <dt class="optional">Red ring/dot</dt>
+        <dd>Error occurred (check debug sidebar)</dd>
+        <dt class="optional">No status</dt>
+        <dd>Lookup completed successfully</dd>
+    </dl>
+
+    <h3>Examples</h3>
+    <h4>Basic Lookup</h4>
+    <pre>msg.payload = "8.8.8.8";
+return msg;</pre>
+
+    <h4>Custom Properties</h4>
+    <pre>msg.ipAddress = "1.1.1.1";
+// Configure node to use ipAddress as input
+// and ipData as output</pre>
+
+    <h4>Extract Specific Fields</h4>
+    <pre>// After ipinfo lookup
+msg.country = msg.payload.country;
+msg.city = msg.payload.city;
+msg.coordinates = msg.payload.loc;
+return msg;</pre>
+
+    <h3>API Rate Limits</h3>
+    <p>IPInfo.io has the following rate limits:</p>
+    <ul>
+        <li><b>Free tier</b>: 50,000 requests/month</li>
+        <li><b>Basic tier</b>: 250,000 requests/month</li>
+        <li><b>Standard tier</b>: 500,000 requests/month</li>
+        <li><b>Business tier</b>: Custom limits</li>
+    </ul>
+    <p><b>Tip</b>: Enable caching in the configuration node to reduce API calls and stay within limits.</p>
+
+    <h3>Performance Tips</h3>
+    <ul>
+        <li>Enable caching to reduce API calls for repeated IPs</li>
+        <li>Use appropriate cache TTL (default 24 hours)</li>
+        <li>Adjust cache size based on your use case (default 5000 items)</li>
+        <li>Use input validation to prevent unnecessary API calls</li>
+    </ul>
+
+    <h3>Troubleshooting</h3>
+    <p>See the <a href="https://github.com/gautric/node-red-ipinfo#troubleshooting" target="_blank">troubleshooting guide</a> for common issues and solutions.</p>
+
+    <h3>References</h3>
+    <ul>
+        <li><a href="https://ipinfo.io/docs" target="_blank">IPInfo.io API Documentation</a></li>
+        <li><a href="https://ipinfo.io/account/token" target="_blank">Get your API token</a></li>
+        <li><a href="https://github.com/gautric/node-red-ipinfo" target="_blank">GitHub Repository</a></li>
+        <li><a href="https://flows.nodered.org/node/@gautric/node-red-ipinfo" target="_blank">Node-RED Flow Library</a></li>
+    </ul>
 </script>
