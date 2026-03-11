@@ -5,32 +5,25 @@
             name: { value: "IPInfo Config", required: true },
             timeout: {
                 value: "1000", required: true,
-                label: RED._("node-red:common.label.timeout"),
                 validate: RED.validators.typedInput({ type: 'num' })
             },
-            cacheEnabled: { value: false,
-                label: RED._("node-red:common.label.cacheEnabled"),
-                validate: RED.validators.typedInput({ type: 'bool' })
-            },
+            cacheEnabled: { value: false },
             maxitem: {
                 value: "5000", required: false,
-                label: RED._("node-red:common.label.timeout"),
                 validate: RED.validators.typedInput({ type: 'num' })
             },
             ttl: {
-                value: ""+ (24 * 1000 * 60 * 60), required: false,
-                label: RED._("node-red:common.label.timeout"),
+                value: "" + (24 * 1000 * 60 * 60), required: false,
                 validate: RED.validators.typedInput({ type: 'num' })
-            },
+            }
         },
         credentials: {
             token: { type: "password" }
         },
         label: function () {
-            return this.name;
+            return this.name || "IPInfo Config";
         },
         oneditprepare: function () {
-           
             $("#node-config-input-timeout").typedInput({
                 type: "num",
                 types: ["num"],
@@ -47,14 +40,11 @@
                 typeField: "#node-config-input-ttl-type"
             });
 
-            $("#node-config-input-cacheEnabled").on("change", function() {
-
+            $("#node-config-input-cacheEnabled").on("change", function () {
                 if ($(this).is(":checked")) {
                     $(".node-config-input-cacheEnabled-row").show();
                 } else {
                     $(".node-config-input-cacheEnabled-row").hide();
-                    $('#node-config-input-maxitem').val('');
-                    $('#node-config-input-ttl').val('');
                 }
                 RED.tray.resize();
             });
@@ -64,59 +54,65 @@
 
 <script type="text/html" data-template-name="ipinfo-config">
     <div class="form-row">
-        <label for="node-config-input-name"><i class="fa fa-tag"></i> Name</label>
+        <label for="node-config-input-name"><i class="fa fa-tag"></i> <span data-i18n="ipinfo.label.name">Name</span></label>
         <input type="text" id="node-config-input-name">
     </div>
     <div class="form-row">
-        <label for="node-config-input-token"><i class="fa fa-key"></i> Token</label>
+        <label for="node-config-input-token"><i class="fa fa-key"></i> <span data-i18n="ipinfo.label.token">Token</span></label>
         <input type="password" id="node-config-input-token">
     </div>
     <div class="form-row">
-        <label for="node-config-input-name"><i class="fa fa-clock-o"></i> Timeout</label>
+        <label for="node-config-input-timeout"><i class="fa fa-clock-o"></i> <span data-i18n="ipinfo.label.timeout">Timeout</span></label>
         <input type="text" id="node-config-input-timeout">
         <input type="hidden" id="node-config-input-timeout-type">
     </div>
-
-
     <div class="form-row">
-        <label for="node-config-input-cacheEnabled"><i class="fa fa-database"></i> Cache</label><input type="checkbox" id="node-config-input-cacheEnabled" style="display: inline-block; width: auto; vertical-align: top;">
+        <label for="node-config-input-cacheEnabled"><i class="fa fa-database"></i> <span data-i18n="ipinfo.label.cacheEnabled">Cache</span></label>
+        <input type="checkbox" id="node-config-input-cacheEnabled" style="display:inline-block; width:auto; vertical-align:top;">
     </div>
-
     <div class="form-row">
-
-        <div style="margin-left: 20px" class="node-config-input-cacheEnabled-row hide">
+        <div style="margin-left:20px" class="node-config-input-cacheEnabled-row hide">
             <div class="form-row">
-                <label for="node-config-input-maxitem"><i class="fa fa-ellipsis-h"></i> MaxItem</label>
+                <label for="node-config-input-maxitem"><i class="fa fa-ellipsis-h"></i> <span data-i18n="ipinfo.label.maxitem">Max Items</span></label>
                 <input type="text" id="node-config-input-maxitem">
                 <input type="hidden" id="node-config-input-maxitem-type">
-
             </div>
             <div class="form-row">
-                <label for="node-config-input-ttl"><i class="fa fa-spinner fa-spin fa-fw"></i> TTL</label>
+                <label for="node-config-input-ttl"><i class="fa fa-hourglass-half"></i> <span data-i18n="ipinfo.label.ttl">TTL (ms)</span></label>
                 <input type="text" id="node-config-input-ttl">
                 <input type="hidden" id="node-config-input-ttl-type">
             </div>
         </div>
     </div>
-
 </script>
 
-
 <script type="text/html" data-help-name="ipinfo-config">
-    <p>IPinfo Config NodeJS Client Library for Node Red</p>
-    <p dir="auto">This node configure the ipinfo node.</p>
-    <h3>IPInfo Config</h3>
-    <ul dir="auto">
-        <li><code>name</code>: Name of the instance node configuration</li>
-        <li><code>token</code>: <a href="https://ipinfo.io/account/token" rel="nofollow">Your Token</a> for calling <a href="https://ipinfo.io" rel="nofollow">IPInfo</a>  service</li>
-        <li><code>timeout</code>: <code>1000</code> ms, Timeout of the request</li>
-        <li><code>cacheEnabled</code>: <code>true</code>/<code>false</code>, Enable or disable cache to improve perf and reduce cost</li>
-        <li><code>maxitem</code>: <code>5000</code>, number max of item into the cache</li>
-        <li><code>ttl</code>: <code>24 * 1000 * 60 * 60</code> ms, Time To Leave of the item inside the cache</li>
-    </ul>
-    
-    <h3>Other info</h3>
-    <a href="https://flows.nodered.org/node/@gautric/node-red-ipinfo" target="_blank">More info at Node-Red</a>
-    <img alt="Version" src="https://img.shields.io/npm/v/@gautric/node-red-ipinfo.svg">
+    <p>Configuration node for the IPInfo.io geolocation service.</p>
 
+    <h3>Settings</h3>
+    <dl class="message-properties">
+        <dt>Name</dt>
+        <dd>Display name for this configuration instance.</dd>
+        <dt>Token</dt>
+        <dd>Your <a href="https://ipinfo.io/account/token" target="_blank">IPInfo.io API token</a>. Stored securely as a credential.</dd>
+        <dt>Timeout</dt>
+        <dd>HTTP request timeout in milliseconds (default: <code>1000</code>).</dd>
+        <dt>Cache</dt>
+        <dd>Enable an in-memory LRU cache to reduce API calls and improve response times.</dd>
+        <dt>Max Items</dt>
+        <dd>Maximum number of entries in the cache (default: <code>5000</code>).</dd>
+        <dt>TTL</dt>
+        <dd>Time-to-live for each cache entry in milliseconds (default: <code>86400000</code> = 24 hours).</dd>
+    </dl>
+
+    <h3>Details</h3>
+    <p>This node is shared across all <code>ipinfo</code> nodes that reference it. Create one config per API token.</p>
+    <p>Enabling the cache is recommended for production use — it prevents redundant API calls for recently looked-up IPs and helps you stay within your plan's rate limits.</p>
+
+    <h3>References</h3>
+    <ul>
+        <li><a href="https://ipinfo.io/docs" target="_blank">IPInfo.io API Documentation</a></li>
+        <li><a href="https://ipinfo.io/account/token" target="_blank">Get your API token</a></li>
+        <li><a href="https://github.com/gautric/node-red-ipinfo" target="_blank">GitHub Repository</a></li>
+    </ul>
 </script>

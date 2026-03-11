@@ -1,14 +1,20 @@
 {
   "name": "@gautric/node-red-ipinfo",
-  "version": "1.0.0",
-  "description": "The Trusted Source For IP Address Data Node-Red Implementation",
+  "version": "1.1.0",
+  "description": "Node-RED node for IP geolocation using the IPInfo.io API — retrieve city, region, country, coordinates, ISP, and more for any IP address.",
   "keywords": [
     "node-red",
     "IPinfo",
     "node-ipinfo",
     "ip",
+    "ip-address",
+    "ipv4",
+    "ipv6",
     "network",
-    "geolocation"
+    "geolocation",
+    "geo",
+    "lookup",
+    "whois"
   ],
   "author": {
     "name": "Greg I/O",
@@ -36,22 +42,36 @@
     "email": "gautric4code@gmail.com"
   },
   "engines": {
-    "node": ">=12.0.0"
+    "node": ">=18.0.0"
   },
   "type": "commonjs",
   "main": "ipinfo.js",
+  "files": [
+    "ipinfo.js",
+    "ipinfo.html",
+    "ipinfo-config.js",
+    "ipinfo-config.html",
+    "icons/",
+    "locales/",
+    "examples/",
+    "LICENSE",
+    "README.md"
+  ],
   "scripts": {
     "test": "mocha \"test/**/*_spec.js\"",
     "test:watch": "mocha \"test/**/*_spec.js\" --watch",
-    "test:coverage": "nyc mocha \"test/**/*_spec.js\""
+    "test:coverage": "nyc mocha \"test/**/*_spec.js\"",
+    "lint": "eslint *.js"
   },
   "dependencies": {
-    "node-ipinfo": "^4.0.1"
+    "node-ipinfo": "^4.3.0"
   },
   "devDependencies": {
+    "eslint": "^8.56.0",
     "mocha": "^10.0.0",
-    "should": "^13.2.3",
     "node-red-node-test-helper": "^0.3.0",
-    "nyc": "^15.1.0"
+    "nyc": "^15.1.0",
+    "should": "^13.2.3",
+    "sinon": "^17.0.0"
   }
 }

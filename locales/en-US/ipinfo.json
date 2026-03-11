@@ -6,7 +6,10 @@
             "timeout": "Timeout",
             "token": "Token",
             "name": "Name",
-            "config": "Config."
+            "config": "Config.",
+            "cacheEnabled": "Enable Cache",
+            "maxitem": "Max Items",
+            "ttl": "TTL (ms)"
         },
         "status": {
             "lookupip": "Looking up IP address",
@@ -17,6 +20,7 @@
         },
         "errors": {
             "missing-config": "IPInfo configuration node not found",
+            "missing-token": "No API token configured — IP lookups will fail",
             "no-ip": "No IP address provided in message property",
             "invalid-ip": "Invalid IP address format: __ip__",
             "lookup-failed": "IP lookup failed: __error__",
